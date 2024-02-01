@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
@@ -65,6 +66,9 @@ const config = {
           600: '#16A34A',
           500: '#22C55E',
         },
+      },
+      fontFamily: {
+        primary: ['var(--font-plus-jakarta-sans)', ...fontFamily.sans],
       },
     },
   },
