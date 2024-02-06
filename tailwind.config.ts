@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss"
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
@@ -47,7 +46,8 @@ const config = {
           900: '#1E0047',
         },
         neutral: {
-          DEFAULT: '#F8FAFC',
+          DEFAULT: '#FFFFFF',
+          50: '#F8FAFC',
           100: '#F1F5F9',
           200: '#E2E8F0',
           300: '#CBD5E1',
@@ -66,10 +66,13 @@ const config = {
           600: '#16A34A',
           500: '#22C55E',
         },
+        red: {
+          600: '#DC2626'
+        }
       },
-      fontFamily: {
-        primary: ['var(--font-plus-jakarta-sans)', ...fontFamily.sans],
-      },
+      dropShadow: {
+        DEFAULT: '0px 1px 3px 0px #0000001A',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

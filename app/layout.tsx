@@ -3,11 +3,16 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
-  weight: ['200', '300', '400', '500', '600', '700', '800'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans'
+  display: 'swap'
 });
+// const dancing_script = Dancing_Script({
+//   style: ['normal'],
+//   subsets: ['latin'],
+//   display: 'swap'
+//   // variable: '--font-plus-jakarta-sans'
+// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plus_jakarta_sans.className} font-primary`}>{children}</body>
+      <body className={`${plus_jakarta_sans.className} `}>{children}</body>
     </html>
   );
 }
