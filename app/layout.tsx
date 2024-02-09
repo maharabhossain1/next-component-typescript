@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import Header from '@/components/header';
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
   style: ['normal', 'italic'],
@@ -26,7 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plus_jakarta_sans.className} `}>{children}</body>
+      <body className={`${plus_jakarta_sans.className} bg-neutral-50`}>
+        <div className="flex h-screen w-full flex-col">
+          <div className="z-30">
+            <Header />
+          </div>
+          <div className="flex-1 overflow-y-auto">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }

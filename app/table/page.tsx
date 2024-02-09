@@ -2,7 +2,17 @@ import React from 'react';
 import { DataTable } from './components/data-table';
 import { columns } from './components/columns';
 
-const dummyData = [
+type dummyData = {
+  id: number;
+  name: string;
+  email: string;
+  programName: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  action: string;
+}[];
+const dummyData: dummyData = [
   {
     id: 1,
     name: 'John Doe',
@@ -155,11 +165,9 @@ const dummyData = [
   }
 ];
 
-console.log(dummyData);
-
 const CustomTable = () => {
   return (
-    <div className="bg-background m-4 overflow-hidden rounded-[0.5rem] border shadow-md md:shadow-xl">
+    <div className="m-4 overflow-hidden rounded-[0.5rem] border bg-neutral shadow-md md:shadow-xl">
       <div className="flex h-full flex-1 flex-col space-y-8 p-8">
         <DataTable data={dummyData} columns={columns} />
       </div>
