@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const MultiStepFormLayout = () => {
-  return (
-    <div>MultiStepFormLayout</div>
-  )
-}
+const MultiStepFormLayout = ({ children }: { children: React.ReactNode }) => {
+  return <div className="max-w-8xl mx-auto">{children}</div>;
+};
 
-export default MultiStepFormLayout
+export default MultiStepFormLayout;

@@ -72,6 +72,9 @@ const config = {
       },
       dropShadow: {
         DEFAULT: '0px 1px 3px 0px #0000001A',
+      },
+      maxWidth: {
+        '8xl': '82.5rem',
       }
     },
   },

@@ -1,8 +1,7 @@
 export { default as GoogleIcon } from './google-icon.svg';
 export { default as CaretSortIcon } from './caret-sort-icon.svg';
 export { default as ArrowRightIcon } from './arrow-right-icon.svg';
-
-
+export { default as ArrowLeftIcon } from './arrow-left-icon.svg';
 export { default as QrScanIcon } from './qr-scan-icon.svg';
 export { default as RadioCircleCheckedIcon } from './radio-circle-checked-icon.svg';
 export { default as ReceiptTextIcon } from './receipt-text-icon.svg';
