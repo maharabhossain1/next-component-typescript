@@ -8,6 +8,7 @@ import type { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { checkEmailSchema } from '@/lib/validations/auth';
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 
 type Inputs = z.infer<typeof checkEmailSchema>;
 
@@ -20,8 +21,12 @@ const ResetPasswordForm = () => {
     }
   });
 
-  function onSubmit(data: Inputs) {
-    console.log(data);
+  async function onSubmit(data: Inputs) {
+    const { email } = data;
+    const supabase = createClient();
+    await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${location.origin}/signin/reset-password/confirm`
+    });
   }
   return (
     <Form {...form}>
