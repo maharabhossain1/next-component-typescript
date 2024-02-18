@@ -8,10 +8,16 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { resetPasswordSchema } from '@/lib/validations/auth';
+import { createClient } from '@/lib/supabase/client';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type Inputs = z.infer<typeof resetPasswordSchema>;
 
 const ResetPasswordConfirmForm = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code');
+
   const form = useForm<Inputs>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -20,9 +26,16 @@ const ResetPasswordConfirmForm = () => {
     }
   });
 
-  function onSubmit(data: Inputs) {
-    console.log(data);
+  async function onSubmit(passwordData: Inputs) {
+    const { password } = passwordData;
+
+    const supabase = createClient();
+    const { data } = await supabase.auth.updateUser({ password });
+    if (data) {
+      router.push('/');
+    }
   }
+
   return (
     <Form {...form}>
       <form
@@ -55,7 +68,9 @@ const ResetPasswordConfirmForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Save</Button>
+        <Button type="submit" disabled={!code}>
+          Save
+        </Button>
       </form>
     </Form>
   );
