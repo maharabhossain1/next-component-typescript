@@ -5,6 +5,8 @@ export default async function Home() {
   const {
     data: { session }
   } = await supabase.auth.getSession();
+
   console.log('test-auth', session);
+
   return <main>Component testing and maintenance </main>;
 }

@@ -34,10 +34,13 @@ const SignInForm = () => {
     try {
       const { email, password } = data;
       const supabase = createClient();
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data: userData, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
+
+      console.log('user data', userData);
+
       if (error) {
         setError(error.message);
       } else {
