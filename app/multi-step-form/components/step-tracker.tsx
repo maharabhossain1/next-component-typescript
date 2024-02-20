@@ -17,6 +17,7 @@ interface Step {
   title: string;
   icon: JSX.Element;
 }
+
 const STEPS: Step[] = [
   { id: 1, title: 'Welcome', icon: <SparkleIcon /> },
   { id: 2, title: 'Verification', icon: <QrScanIcon /> },
@@ -24,52 +25,47 @@ const STEPS: Step[] = [
   { id: 4, title: 'Sign Contract', icon: <EditPencilIcon /> },
   { id: 5, title: 'Payment', icon: <CardAddIcon /> }
 ];
+
 const StepTracker = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
-  const handleCompletedStep = (step: number) => {
-    if (!completedSteps.includes(step)) {
-      setCompletedSteps((prev) => [...prev, step]);
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep((prev) => prev - 1);
     }
   };
-  console.log(completedSteps);
+
+  const handleNext = () => {
+    if (currentStep < STEPS.length) {
+      setCompletedSteps((prev) => [...prev, currentStep]);
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
 
   return (
     <div>
-      StepTracker
       <div className="flex w-full items-center gap-2">
-        {STEPS.map((item) => {
-          const { id, title, icon } = item;
-          const state = completedSteps.includes(id)
-            ? 'complete'
-            : item.id === currentStep
-              ? 'current'
-              : 'disabled';
-
+        {STEPS.map(({ id, ...rest }) => {
+          const isCompleted = completedSteps.includes(id);
+          const state = isCompleted ? 'complete' : 'disabled';
           return (
-            <>
-              <StepItem key={id} step={id} state={state} title={title} icon={icon} />
+            <React.Fragment key={id}>
+              <StepItem step={id} state={state} active={id === currentStep} {...rest} />
               {id !== STEPS.length && (
                 <div>
-                  <RightChevronIcon className=" text-neutral-400" />
+                  <RightChevronIcon className="text-neutral-400" />
                 </div>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </div>
       <div>
-        <Button type="button" onClick={() => setCurrentStep((prev) => prev - 1)}>
-          back
+        <Button type="button" onClick={handleBack} disabled={currentStep === 1}>
+          Back
         </Button>
-        <Button
-          type="button"
-          onClick={() => {
-            handleCompletedStep(currentStep);
-            setCurrentStep((prev) => prev + 1);
-          }}
-        >
+        <Button type="button" onClick={handleNext} disabled={currentStep === STEPS.length}>
           Next
         </Button>
       </div>
