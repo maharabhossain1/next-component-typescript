@@ -2,12 +2,15 @@
 
 import React from 'react';
 import StepTracker from './components/step-tracker';
+import { StepperProvider } from './context/stepper-context';
 
 const MultiStepFormPage = () => {
   return (
     <div>
-      MultiStepFormPage yooo
-      <StepTracker />
+      <StepperProvider>
+        MultiStepFormPage yooo
+        <StepTracker />
+      </StepperProvider>
     </div>
   );
 };

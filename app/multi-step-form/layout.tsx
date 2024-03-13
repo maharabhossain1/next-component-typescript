@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MultiStepFormLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div className="max-w-8xl mx-auto">{children}</div>;
+  return <div className="mx-auto max-w-8xl">{children}</div>;
 };
 
 export default MultiStepFormLayout;

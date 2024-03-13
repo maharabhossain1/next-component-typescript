@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import StepItem from './step-item';
 import {
   CardAddIcon,
@@ -11,6 +11,7 @@ import {
   SparkleIcon
 } from '@/icons';
 import { Button } from '@/components/ui/button';
+import { useStepperContext } from '../hooks/use-stepper-context';
 
 interface Step {
   id: number;
@@ -18,7 +19,7 @@ interface Step {
   icon: JSX.Element;
 }
 
-const STEPS: Step[] = [
+export const STEPS: Step[] = [
   { id: 1, title: 'Welcome', icon: <SparkleIcon /> },
   { id: 2, title: 'Verification', icon: <QrScanIcon /> },
   { id: 3, title: 'Financial Plan', icon: <ReceiptTextIcon /> },
@@ -27,21 +28,7 @@ const STEPS: Step[] = [
 ];
 
 const StepTracker = () => {
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-
-  const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prev) => prev - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentStep < STEPS.length) {
-      setCompletedSteps((prev) => [...prev, currentStep]);
-      setCurrentStep((prev) => prev + 1);
-    }
-  };
+  const { completedSteps, currentStep, handleNextStep, handlePreviousStep } = useStepperContext();
 
   return (
     <div>
@@ -62,10 +49,10 @@ const StepTracker = () => {
         })}
       </div>
       <div>
-        <Button type="button" onClick={handleBack} disabled={currentStep === 1}>
+        <Button type="button" onClick={handlePreviousStep} disabled={currentStep === 1}>
           Back
         </Button>
-        <Button type="button" onClick={handleNext} disabled={currentStep === STEPS.length}>
+        <Button type="button" onClick={handleNextStep} disabled={currentStep === STEPS.length}>
           Next
         </Button>
       </div>
